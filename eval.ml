@@ -51,16 +51,19 @@ let rec eval (e : expr) : expr =
                                   ) 
     | ListNil -> ListNil 
     | ListCons (e1, e2) -> ListCons(eval e1, eval e2)
-    | ListHead e -> match eval e with
+    | ListHead e -> (match eval e with
                     | ListCons (e1, e2) -> e1
                     | _ -> im_stuck ("ListHead")
-    | ListTail e -> match eval e with
+                    )
+    | ListTail e -> (match eval e with
                     | ListCons (e1, e2) -> e2
                     | _ -> im_stuck ("ListTail")
-    | ListIsNil e -> match eval e with
+                    )
+    | ListIsNil e -> (match eval e with
                     | ListCons (e1, e2) -> NumLit 0
                     | ListNil -> NumLit 1
                     | _ -> im_stuck ("ListIsNil")
+                    )
     (* Things you don't need to implement in this assignment *)
     | _ -> hw4 ()
   with
