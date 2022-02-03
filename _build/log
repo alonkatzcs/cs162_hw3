@@ -1,10 +1,10 @@
-# dune exec -- ./test.exe --show-errors
+# dune build repl.exe
 # OCAMLPARAM: unset
 # Workspace root: /Users/alonkatz/Documents/cs162/hw3
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/r_/jfpkt6q96l3226pqhsl6s_mr0000gn/T/dunea02160.output 2> /dev/null
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/r_/jfpkt6q96l3226pqhsl6s_mr0000gn/T/duneedce42.output 2> /dev/null
 # Auto-detected concurrency: 12
 # disable binary cache
-$ /Users/alonkatz/.opam/4.11.1/bin/ocamlc.opt -config > /var/folders/r_/jfpkt6q96l3226pqhsl6s_mr0000gn/T/duned76ac4.output
+$ /Users/alonkatz/.opam/4.11.1/bin/ocamlc.opt -config > /var/folders/r_/jfpkt6q96l3226pqhsl6s_mr0000gn/T/dune31449c.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -108,4 +108,103 @@ $ /Users/alonkatz/.opam/4.11.1/bin/ocamlc.opt -config > /var/folders/r_/jfpkt6q9
 #      ; windows_unicode = false
 #      }
 #  }
-# Workspace root: /Users/alonkatz/Documents/cs162/hw3
+$ (cd _build/default && /bin/bash -c 'echo let date = \"unknown\" > build_metadata.ml')
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamldep.opt -modules -impl eval.ml) > _build/default/.lamp.objs/eval.ml.d
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .lamp.objs/byte -no-alias-deps -opaque -o .lamp.objs/byte/eval.cmo -c -impl eval.ml)
+> File "eval.ml", lines 48-50, characters 33-35:
+> 48 | .................................(match eval e1 with
+> 49 |                                   | NumLit e ->  if (e <> 0) then (eval e2) else (eval e3)
+> 50 |                                   ).
+> Warning 8: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (ListNil|Var _|Binop (_, _, _)|IfThenElse (_, _, _)|LetBind (_, _, _)|
+> Lambda (_, _)|App (_, _)|ListCons (_, _)|ListHead _|ListTail _|ListIsNil _|
+> Fix _)
+> File "eval.ml", lines 53-59, characters 20-17:
+> 53 | ....................match eval e with
+> 54 |                     | ListCons (e1, e2) -> e1
+> 55 |     | ListTail e -> match eval e with
+> 56 |                     | ListCons (e1, e2) -> e2
+> 57 |     | ListIsNil e -> ListIsNil (eval e)
+> 58 |     (* Things you don't need to implement in this assignment *)
+> 59 |     | _ -> hw4 ()
+> Warning 8: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (ListNil|NumLit _|Var _|Binop (_, _, _)|IfThenElse (_, _, _)|
+> LetBind (_, _, _)|Lambda (_, _)|App (_, _)|ListHead _|ListIsNil _|Fix _)
+> File "eval.ml", lines 34-59, characters 4-17:
+> 34 | ....match e with
+> 35 |     (* Things you need to implement *)
+> 36 |     | NumLit n -> NumLit n
+> 37 |     | Binop (e1, op, e2) -> (match op, eval e1, eval e2 with
+> 38 |                             | Add , NumLit ex1, NumLit ex2 -> NumLit(ex1 + ex2)
+> ...
+> 56 |                     | ListCons (e1, e2) -> e2
+> 57 |     | ListIsNil e -> ListIsNil (eval e)
+> 58 |     (* Things you don't need to implement in this assignment *)
+> 59 |     | _ -> hw4 ()
+> Warning 8: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (Var _|LetBind (_, _, _)|Lambda (_, _)|App (_, _)|ListTail _|ListIsNil _|
+> Fix _)
+> File "eval.ml", line 54, characters 36-38:
+> 54 |                     | ListCons (e1, e2) -> e1
+>                                          ^^
+> Warning 27: unused variable e2.
+> File "eval.ml", line 56, characters 32-34:
+> 56 |                     | ListCons (e1, e2) -> e2
+>                                      ^^
+> Warning 27: unused variable e1.
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .lamp.objs/byte -I .lamp.objs/native -intf-suffix .ml -no-alias-deps -opaque -o .lamp.objs/native/eval.cmx -c -impl eval.ml)
+> File "eval.ml", lines 48-50, characters 33-35:
+> 48 | .................................(match eval e1 with
+> 49 |                                   | NumLit e ->  if (e <> 0) then (eval e2) else (eval e3)
+> 50 |                                   ).
+> Warning 8: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (ListNil|Var _|Binop (_, _, _)|IfThenElse (_, _, _)|LetBind (_, _, _)|
+> Lambda (_, _)|App (_, _)|ListCons (_, _)|ListHead _|ListTail _|ListIsNil _|
+> Fix _)
+> File "eval.ml", lines 53-59, characters 20-17:
+> 53 | ....................match eval e with
+> 54 |                     | ListCons (e1, e2) -> e1
+> 55 |     | ListTail e -> match eval e with
+> 56 |                     | ListCons (e1, e2) -> e2
+> 57 |     | ListIsNil e -> ListIsNil (eval e)
+> 58 |     (* Things you don't need to implement in this assignment *)
+> 59 |     | _ -> hw4 ()
+> Warning 8: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (ListNil|NumLit _|Var _|Binop (_, _, _)|IfThenElse (_, _, _)|
+> LetBind (_, _, _)|Lambda (_, _)|App (_, _)|ListHead _|ListIsNil _|Fix _)
+> File "eval.ml", lines 34-59, characters 4-17:
+> 34 | ....match e with
+> 35 |     (* Things you need to implement *)
+> 36 |     | NumLit n -> NumLit n
+> 37 |     | Binop (e1, op, e2) -> (match op, eval e1, eval e2 with
+> 38 |                             | Add , NumLit ex1, NumLit ex2 -> NumLit(ex1 + ex2)
+> ...
+> 56 |                     | ListCons (e1, e2) -> e2
+> 57 |     | ListIsNil e -> ListIsNil (eval e)
+> 58 |     (* Things you don't need to implement in this assignment *)
+> 59 |     | _ -> hw4 ()
+> Warning 8: this pattern-matching is not exhaustive.
+> Here is an example of a case that is not matched:
+> (Var _|LetBind (_, _, _)|Lambda (_, _)|App (_, _)|ListTail _|ListIsNil _|
+> Fix _)
+> File "eval.ml", line 54, characters 36-38:
+> 54 |                     | ListCons (e1, e2) -> e1
+>                                          ^^
+> Warning 27: unused variable e2.
+> File "eval.ml", line 56, characters 32-34:
+> 56 |                     | ListCons (e1, e2) -> e2
+>                                      ^^
+> Warning 27: unused variable e1.
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -a -o lamp.cmxa .lamp.objs/native/ast.cmx .lamp.objs/native/parser.cmx .lamp.objs/native/scanner.cmx .lamp.objs/native/eval.cmx)
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -I .repl.eobjs/byte -no-alias-deps -opaque -o .repl.eobjs/byte/dune__exe.cmo -c -impl .repl.eobjs/dune__exe.ml-gen)
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .repl.eobjs/byte -I /Users/alonkatz/.opam/4.11.1/lib/linenoise -I /Users/alonkatz/.opam/4.11.1/lib/result -I .lamp.objs/byte -no-alias-deps -opaque -open Dune__exe -o .repl.eobjs/byte/dune__exe__Build_metadata.cmo -c -impl build_metadata.ml)
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -bin-annot -I .repl.eobjs/byte -I /Users/alonkatz/.opam/4.11.1/lib/linenoise -I /Users/alonkatz/.opam/4.11.1/lib/result -I .lamp.objs/byte -no-alias-deps -opaque -open Dune__exe -o .repl.eobjs/byte/dune__exe__Repl.cmo -c -impl repl.ml)
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -I .repl.eobjs/byte -I .repl.eobjs/native -intf-suffix .ml-gen -no-alias-deps -opaque -o .repl.eobjs/native/dune__exe.cmx -c -impl .repl.eobjs/dune__exe.ml-gen)
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .repl.eobjs/byte -I .repl.eobjs/native -I /Users/alonkatz/.opam/4.11.1/lib/linenoise -I /Users/alonkatz/.opam/4.11.1/lib/result -I .lamp.objs/byte -I .lamp.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o .repl.eobjs/native/dune__exe__Build_metadata.cmx -c -impl build_metadata.ml)
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -I .repl.eobjs/byte -I .repl.eobjs/native -I /Users/alonkatz/.opam/4.11.1/lib/linenoise -I /Users/alonkatz/.opam/4.11.1/lib/result -I .lamp.objs/byte -I .lamp.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o .repl.eobjs/native/dune__exe__Repl.cmx -c -impl repl.ml)
+$ (cd _build/default && /Users/alonkatz/.opam/4.11.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A -g -o repl.exe lamp.cmxa /Users/alonkatz/.opam/4.11.1/lib/result/result.cmxa /Users/alonkatz/.opam/4.11.1/lib/linenoise/linenoise.cmxa -I /Users/alonkatz/.opam/4.11.1/lib/linenoise .repl.eobjs/native/dune__exe.cmx .repl.eobjs/native/dune__exe__Build_metadata.cmx .repl.eobjs/native/dune__exe__Repl.cmx)
