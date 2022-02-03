@@ -43,7 +43,7 @@ let rec eval (e : expr) : expr =
                             | And , NumLit ex1, NumLit ex2 -> if ex1 <> 0 && ex2 <> 0 then NumLit(1) else NumLit(0)
                             | Or , NumLit ex1, NumLit ex2 -> if ex1 <> 0 || ex2 <> 0 then NumLit(1) else NumLit(0)
                             | Eq , NumLit ex1, NumLit ex2 -> if ex1 = ex2 then NumLit(1) else NumLit(0)
-                            | oper, ex1, ex2 -> Binop(ex1, oper, ex2)
+                            | _ -> im_stuck ("Not valid")
                             )
     | IfThenElse (e1, e2, e3) -> (match eval e1 with
                                   | NumLit e ->  if (e <> 0) then (eval e2) else (eval e3)
